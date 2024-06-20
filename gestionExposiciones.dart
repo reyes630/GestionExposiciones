@@ -15,6 +15,25 @@ void main(List<String> args) {
   print("-----------------MENÚ-----------------");
   print("1. Manual agregando datos desde cero");
   print("2. Precargado con los datos predeterminados");
-  opcion = int.parse(stdin.readLineSync()!);
-  
+  opcion = int.parse(stdin.readLineSync()!); //Se pide la opcion
+  do {
+
+    print("-----------------SUB-MENÚ-----------------");
+    print("1. Temas");
+    print("2. Estudiantes");
+    print("3. Complejidad");
+    print("4. Asignacion");
+    print("5. Mostrar Historial");
+    print("6. Salir");
+    opcion = int.parse(stdin.readLineSync()!);
+    
+    switch (opcion) {
+      case 1 {
+        do {
+          print("object");
+        } while (opcion != 5);
+      }
+    }
+    
+  } while (opcion != 6);
 }
