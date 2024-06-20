@@ -155,6 +155,88 @@ void main(List<String> args) {
           }
         } while (opcion != 5);
         break;
+      
+      case 2: // ESTUDIANTES
+        do {
+          print("-----Estudiantes-----");
+          print("1. Crear estudiante");
+          print("2. Editar estudiante");
+          print("3. Eliminar estudiante");
+          print("4. Ver estudiantes");
+          print("5. Salir");
+          switch (opcion) { //MENU ESTUDIANTES
+            case 1: 
+             do {
+                print("Ingrese el nombre del Estudiante que desea agregar");
+                nombre = stdin.readLineSync()!;
+                estudiantes.add(nombre);
+                print("1. Ingresar nuevo nombre");
+                print("2. Salir");
+                do {
+                  opcion = int.parse(stdin.readLineSync()!);
+                  if (opcion != 1 && opcion != 2) {
+                    print("Ingrese una opción correcta");
+                  }
+                } while (opcion != 1 && opcion != 2);
+              } while (opcion != 2);
+              break;
+              
+            case 2:
+              do {
+                print("Estudiantes actuales:");
+                for (var i = 0; i < estudiantes.length; i++) {
+                  print("${i + 1}. ${estudiantes[i]}");
+                }
+                print("Ingrese el número del Estudiante que desea editar");
+                posicion = int.parse(stdin.readLineSync()!);
+                print("Ingrese el nuevo nombre de el Estudiante: ${estudiantes[posicion - 1]}");
+                nombre = stdin.readLineSync()!;
+                estudiantes[posicion - 1] = nombre;
+                print("1. Editar otro nombre");
+                print("2. Salir");
+                do {
+                  opcion = int.parse(stdin.readLineSync()!);
+                  if (opcion != 1 && opcion != 2) {
+                    print("Ingrese una opción correcta");
+                  }
+                } while (opcion != 1 && opcion != 2);
+              } while (opcion != 2);
+              break;
+
+            case 3:
+              do {
+                print("Temas actuales:");
+                for (var i = 0; i < estudiantes.length; i++) {
+                  print("${i + 1}. ${estudiantes[i]}");
+                }
+                print("Ingrese el número del tema que desea eliminar");
+                posicion = int.parse(stdin.readLineSync()!);
+                do {
+                  if (posicion > estudiantes.length || posicion <= 0) {
+                    print("Ingrese una posición correcta");
+                    posicion = int.parse(stdin.readLineSync()!);
+                  }
+                } while (posicion > estudiantes.length || posicion <= 0);
+                nombre = estudiantes[posicion - 1];
+                estudiantes.removeAt(posicion - 1);
+                cantEstudiantes.removeAt(posicion - 1);
+                asignacion.removeAt(posicion - 1);
+                print("Se eliminó el tema: $nombre");
+                print("1. Eliminar otro tema");
+                print("2. Salir");
+                do {
+                  opcion = int.parse(stdin.readLineSync()!);
+                  if (opcion != 1 && opcion != 2) {
+                    print("Ingrese una opción correcta");
+                  }
+                } while (opcion != 1 && opcion != 2);
+              } while (opcion != 2);
+            
+            
+          }
+
+        } while(opcion != 5);
+      
     }
   } while (opcion != 6);
 }
