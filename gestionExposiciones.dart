@@ -63,6 +63,7 @@ void main(List<String> args) {
     opcion = int.parse(stdin.readLineSync()!);
 
     switch (opcion) {
+      /* ------------------------------ MENU DE TEMAS ------------------------- */
       case 1: //TEMAS
         do {
           print("-----Temas-----");
@@ -72,8 +73,8 @@ void main(List<String> args) {
           print("4. Ver temas");
           print("5. Salir");
           opcion = int.parse(stdin.readLineSync()!);
-          switch (opcion) {
-            //MENÚ TEMAS
+          switch (opcion) { //MENÚ TEMAS
+          //CREAR TEMAS 
             case 1:
               do {
                 print("Ingrese el nombre del tema que desea agregar");
@@ -89,7 +90,8 @@ void main(List<String> args) {
                 } while (opcion != 1 && opcion != 2);
               } while (opcion != 2);
               break;
-
+          
+          //EDITAR TEMAS
             case 2:
               do {
                 print("Temas actuales:");
@@ -112,7 +114,8 @@ void main(List<String> args) {
                 } while (opcion != 1 && opcion != 2);
               } while (opcion != 2);
               break;
-
+          
+          //ELIMINAR TEMAS
             case 3:
               do {
                 print("Temas actuales:");
@@ -141,12 +144,16 @@ void main(List<String> args) {
                   }
                 } while (opcion != 1 && opcion != 2);
               } while (opcion != 2);
+
+          //VER TEMAS 
             case 4:
               print("Temas actuales:");
               for (var i = 0; i < temas.length; i++) {
                 print("${i + 1}. ${temas[i]}");
               }
               break;
+          
+          //SALIR
             case 5:
               break;
             default:
@@ -155,6 +162,240 @@ void main(List<String> args) {
           }
         } while (opcion != 5);
         break;
-    }
+        /* ------------------------- MENU DE ESTUDIANTES ---------------------------------- */
+      case 2: // ESTUDIANTES
+        do {
+          print("-----Estudiantes-----");
+          print("1. Crear estudiante");
+          print("2. Editar estudiante");
+          print("3. Eliminar estudiante");
+          print("4. Ver estudiantes");
+          print("5. Salir");
+          switch (opcion) { //MENU ESTUDIANTES
+          // CREAR ESTUDIANTES
+            case 1: 
+             do {
+                print("Ingrese el nombre del Estudiante que desea agregar");
+                nombre = stdin.readLineSync()!;
+                estudiantes.add(nombre);
+                print("1. Ingresar nuevo nombre");
+                print("2. Salir");
+                do {
+                  opcion = int.parse(stdin.readLineSync()!);
+                  if (opcion != 1 && opcion != 2) {
+                    print("Ingrese una opción correcta");
+                  }
+                } while (opcion != 1 && opcion != 2);
+              } while (opcion != 2);
+              break;
+            
+          //  EDITAR ESTUDIANTES
+            case 2:
+              do {
+                print("Estudiantes actuales:");
+                for (var i = 0; i < estudiantes.length; i++) {
+                  print("${i + 1}. ${estudiantes[i]}");
+                }
+                print("Ingrese el número del Estudiante que desea editar");
+                posicion = int.parse(stdin.readLineSync()!);
+                print("Ingrese el nuevo nombre de el Estudiante: ${estudiantes[posicion - 1]}");
+                nombre = stdin.readLineSync()!;
+                estudiantes[posicion - 1] = nombre;
+                print("1. Editar otro nombre");
+                print("2. Salir");
+                do {
+                  opcion = int.parse(stdin.readLineSync()!);
+                  if (opcion != 1 && opcion != 2) {
+                    print("Ingrese una opción correcta");
+                  }
+                } while (opcion != 1 && opcion != 2);
+              } while (opcion != 2);
+              break;
+
+          // ELIMINAR ESTUDIANTES 
+            case 3:
+              do {
+                print("Estudiantes actuales:");
+                for (var i = 0; i < estudiantes.length; i++) {
+                  print("${i + 1}. ${estudiantes[i]}");
+                }
+                print("Ingrese el número del Estudiante que desea eliminar");
+                posicion = int.parse(stdin.readLineSync()!);
+                print("Ingrese el nuevo nombre de el Estudiante: ${estudiantes[posicion - 1]}");
+                nombre = stdin.readLineSync()!;
+                estudiantes[posicion - 1] = nombre;
+                print("1. Editar otro nombre");
+                print("2. Salir");
+                do {
+                  opcion = int.parse(stdin.readLineSync()!);
+                  if (opcion != 1 && opcion != 2) {
+                    print("Ingrese una opción correcta");
+                  }
+                } while (opcion != 1 && opcion != 2);
+              } while (opcion != 2);
+              break;
+              
+          //VER ESTUDIANTES  
+            case 4:
+              print("estudiantes actuales:");
+              for (var i = 0; i < estudiantes.length; i++) {
+                print("${i + 1}. ${estudiantes[i]}");
+              }
+              break;
+
+          
+          //SALIR 
+            case 5:
+              break;
+          }
+
+        } while(opcion != 5);
+      /* ------------------------------- MENU COMPLEJIDAD ----------------------- */
+      case 3: //COMPLEJIDAD 
+        do {
+          print("----- Complejidad -----");
+          print("1. Insertar complejidad");
+          print("2. Editar Complejidad");
+          print("3. Ver Complejidad");
+          print("4. Salir");
+          opcion = int.parse(stdin.readLineSync()!);
+          switch (opcion) { //MENU COMPLEJIDAD
+          // INSERTAR COMPLEJIDAD
+          //-------RECORRER LISTA DE TEMAS Y COMPROBAR LA CANTIDAD DE ESTUDIANTES -----
+            case 1:
+              do {
+                print("Ingrese la cantidad de estudiantes para el tema 1...2...3"); 
+                
+                // <------UTILIZAR UN FOR 
+                
+
+                print("1. Ingresar nuevo nombre");
+                print("2. Salir");
+                do {
+                  opcion = int.parse(stdin.readLineSync()!);
+                  if (opcion != 1 && opcion != 2) {
+                    print("Ingrese una opción correcta");
+                  }
+                } while (opcion != 1 && opcion != 2);
+              } while (opcion != 2);
+              break;
+
+          //EDITAR COMPLEJIDAD
+            case 2:
+            do {
+                print("Temas actuales:");
+                for (var i = 0; i < temas.length; i++) {    // <------- AGREGAR LA COMPLEJIDAD AL TEMA 
+                  print("${i + 1}. ${temas[i]}");
+                }
+                print("Ingrese el numero del tema al cual desea cambiar la complejidad ");
+                //AQUI INGRESA EL NUMERO DE TEMA
+                print("Ingrese el nuevo valor de complejidad");
+                //AQUI SE INGRESA EL NUEVO VALOR
+
+
+                print("1. Ingresar nuevo nombre");
+                print("2. Salir");
+                do {
+                  opcion = int.parse(stdin.readLineSync()!);
+                  if (opcion != 1 && opcion != 2) {
+                    print("Ingrese una opción correcta");
+                  }
+                } while (opcion != 1 && opcion != 2);
+
+
+                
+              } while (opcion != 2);
+
+              break;
+
+          //VER COMPLEJIDAD 
+          // ------ MOSTRAR LA EXPOSICION Y EL NUMERO DE ESTUDIANTES ASIGNADOS ---------
+            case 3:
+            do {
+                // EN ESTE ESPACIO SE DEBE MOSTRAR LA LISTA DE TEMAS Y LA CANTIDAD DE ALUMNOS NECESARIOS PARA EXPONER 
+                print("Temas actuales:");
+                for (var i = 0; i < temas.length; i++) {    // <------- AGREGAR LA COMPLEJIDAD AL TEMA 
+                  print("${i + 1}. ${temas[i]}");           // <------- AGRGAR EL NUMERO DE PERSONAS 
+                }
+                
+
+
+                print("1. Ingresar nuevo nombre");
+                print("2. Salir");
+                do {
+                  opcion = int.parse(stdin.readLineSync()!);
+                  if (opcion != 1 && opcion != 2) {
+                    print("Ingrese una opción correcta");
+                  }
+                } while (opcion != 1 && opcion != 2);
+              } while (opcion != 2);
+              break;
+
+          //SALIR
+            case 4:
+              break;
+          }
+
+        } while (opcion != 4);
+        break;
+
+      /* ------------------------- MENU ASIGNACION ----------------------------- */
+      case 4:
+        do {
+          switch (opcion) {
+          //ASIGNAR POR TEMAS 
+            case 1:
+              do {
+                //MOSTRAR LOS TEMAS DISPONIBLES 
+
+                print("Ingrese el numero del tema que desea asignar");
+
+                //PREGUNTAR SI LE GUSTO O NO LA ASIGNACION 
+                print("¿Desea Volver a asignar?");
+
+                // CREAR UN CICLO QUE DIGA SI YA TIENE ASIGANACIONES O NO 
+                print("Este tema ya tiene asignacion. ¿Desea cambiar?");
+
+
+
+                print("1. Ingresar nuevo tema");
+                print("2. Salir");
+                do {
+                  opcion = int.parse(stdin.readLineSync()!);
+                  if (opcion != 1 && opcion != 2) {
+                    print("Ingrese una opción correcta");
+                  }
+                } while (opcion != 1 && opcion != 2);
+              } while (opcion !=2);
+              break;
+          //EDITAR ASIGNACION
+            case 2:
+              break;
+          //ELIMINAR ASIGNACION
+            case 3:
+              break;
+          //MOSTRAR ASIGNACIONES 
+            case 4:
+              break;
+          //ASIGANAR TODO
+            case 5:
+              break;
+          //SALIR
+            case 6:
+              break;
+          }
+
+        }while (opcion != 6);
+        break;
+
+      /* -------------------------- MENU MOSTRAR HISTORIAL ----------------------- */
+      case 5: 
+        break;
+      /* --------------------------------- SALIR ------------------------ */
+      case 6:
+        break;
+
+      
+    }  
   } while (opcion != 6);
 }
