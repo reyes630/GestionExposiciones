@@ -8,7 +8,7 @@ void main() {
   console.resetColorAttributes();
 
   console.writeLine();
-
+  // CONTADOR DE COLUMNAS Y FILAS 
   console.writeLine('This console window has ${console.windowWidth} cols and '
       '${console.windowHeight} rows.');
   console.writeLine();
@@ -16,7 +16,7 @@ void main() {
   console.writeLine('This text is left aligned.', TextAlignment.left);
   console.writeLine('This text is center aligned.', TextAlignment.center);
   console.writeLine('This text is right aligned.', TextAlignment.right);
-
+ //COLORES 
   for (final color in ConsoleColor.values) {
     console.setForegroundColor(color);
     console.writeLine(color.toString().split('.').last);

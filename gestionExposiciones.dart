@@ -1,9 +1,10 @@
-//import 'package:dart_console/dart_console.dart';
 import 'dart:io';
+import 'package:dart_console/dart_console.dart';
 
 void main(List<String> args) {
   //JUAN DANIEL GÓMEZ Y ESTEBAN REYES - MINI PROYECTO TRIMESTRE 2
   //DECLARACIÓN DE LISTAS
+   final console = Console();
   List<String> temas = [
     "Suma",
     "Resta",
@@ -33,7 +34,7 @@ void main(List<String> args) {
   //DECLARACIÓN DE MATRIZ
   List<List<String>> asignacion =
       []; //Matriz que guardará las listas de los estudiantes por tema
-  List<List<String>> historial =
+  List<List<String>> historial = 
       []; //Matriz para guardar el historial de las asignaciones
   //DECLARACIÓN DE VARIABLES
   int opcion, posicion;
@@ -41,7 +42,9 @@ void main(List<String> args) {
   //MENÚ PRINCIPAL
   do {
     //No terminará hasta que ingrese una opción correcta
-    print("-----------------MENÚ-----------------");
+    console.setForegroundColor(ConsoleColor.blue);  // COLOR DE LA LETRA DEL MENSAJE 
+    
+    console.writeLine("-----------------MENÚ-----------------");
     print("1. Manual agregando datos desde cero");
     print("2. Precargado con los datos predeterminados");
     opcion = int.parse(stdin.readLineSync()!); //Se pide la opcion
@@ -52,6 +55,7 @@ void main(List<String> args) {
       estudiantes = [];
       cantEstudiantes = [];
     }
+    console.resetColorAttributes();
   } while (opcion != 1 && opcion != 2);
   do {
     print("-----------------SUB-MENÚ-----------------");
