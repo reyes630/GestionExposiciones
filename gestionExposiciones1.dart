@@ -372,7 +372,7 @@ void estudiantesSeccion(int opcion, List<String> estudiantes, List<String> estud
 
       //VER ESTUDIANTES
       case 4:
-        print("Temas actuales:");
+        print("Estudiantes actuales:");
         for (var i = 0; i < estudiantes.length; i++) {
           print("${i + 1}. ${estudiantes[i]}");
         }
