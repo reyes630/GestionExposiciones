@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:dart_console/dart_console.dart';
 
+//dart pub add dart_console -> código console
 void main(List<String> args) {
   //JUAN DANIEL GÓMEZ Y ESTEBAN REYES - MINI PROYECTO TRIMESTRE 2
   //DECLARACIÓN DE LISTAS
