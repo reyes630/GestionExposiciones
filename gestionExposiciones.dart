@@ -85,8 +85,6 @@ void main(List<String> args) {
     4
   ]; //Lista para guardar la complejidad de los temas, el número indica la cantidad de estudiantes por tema
   //DECLARACIÓN DE MATRIZ
-  List<List<String>> historial =
-      []; //Matriz para guardar el historial de las asignaciones
   List<List<dynamic>> asignaciones = []; //Matriz para guardar las asignaciones con su respectiva cantidad de estudiantes y sus nombres
   //DECLARACIÓN DE VARIABLES
   int opcion, posicion;
@@ -114,6 +112,13 @@ void main(List<String> args) {
   console.resetColorAttributes();
   opcion = int.parse(stdin.readLineSync()!); //Se pide la opcion
   opcion = volverIntentar(opcion);
+  if(opcion == 1){
+    temasNombre = [];
+    estudiantes = [];
+    estudiantesSinAsignar = [];
+    cantEstudiantes = [];
+    asignaciones = [];
+  }
   do {
     console.setBackgroundColor(ConsoleColor.blue); // COLOR DE FONDO
     console.setForegroundColor(ConsoleColor.white); // COLOR DE FUENTE
@@ -129,7 +134,7 @@ void main(List<String> args) {
     console.setForegroundColor(ConsoleColor.yellow);
     console.writeLine('4. Asignacion', TextAlignment.center);
     console.setForegroundColor(ConsoleColor.magenta);
-    console.writeLine('5. Salir', TextAlignment.center);
+    console.writeLine('0. Salir', TextAlignment.center);
     console.resetColorAttributes();
     opcion = int.parse(stdin.readLineSync()!);
     switch (opcion){
@@ -222,8 +227,16 @@ void main(List<String> args) {
           asignacionSeccion(asignaciones, estudiantes, temasNombre, estudiantesSinAsignar, opcion);
         } while (opcion != 6);
         break;
+      
+      case 0:
+        print("Hasta luego");
+        break;
+      
+      default:
+        print("ingrese una opción correcta");
+        break;
     }
-  } while (opcion != 6);
+  } while (opcion != 0);
 }
 
 int volverIntentar(int opcion){
@@ -426,9 +439,20 @@ void estudiantesSeccion(int opcion, List<String> estudiantes, List<String> estud
 
       //VER ESTUDIANTES
       case 4:
-        print("Estudiantes actuales:");
-        for (var i = 0; i < estudiantes.length; i++) {
-          print("${i + 1}. ${estudiantes[i]}");
+        print("1. Ver estudiantes sin asignar");
+        print("2. Ver todos los estudiantes");
+        opcion = int.parse(stdin.readLineSync()!);
+        opcion = volverIntentar(opcion);
+        if(opcion == 1){
+          print("Estudiantes sin asignar:");
+          for (var i = 0; i < estudiantesSinAsignar.length; i++) {
+            print("${i + 1}. ${estudiantes[i]}");
+          }
+        }else{
+          print("Todos los estudiantes:");
+          for (var i = 0; i < estudiantes.length; i++) {
+            print("${i + 1}. ${estudiantes[i]}");
+          }
         }
         break;
       
@@ -561,7 +585,7 @@ void asignacionSeccion(List<List<dynamic>> asignaciones, List<String> estudiante
               estudiantesSinAsignar.add(asignaciones[posicion - 1][1][i]);
             }
             asignaciones[posicion - 1][1] = [];
-            for (var i = 0; i < asignaciones[posicion - 1][1].length; i++) {
+            for (var i = 0; i < asignaciones[posicion - 1][2]; i++) {
               //Se elige el número aleatorio usando cantidad de estudiantes
               elegido = random.nextInt(estudiantesSinAsignar.length);
               //Se agrega el estudiante de esa posición
@@ -571,7 +595,7 @@ void asignacionSeccion(List<List<dynamic>> asignaciones, List<String> estudiante
             }
           }
         }else{
-          for (var i = 0; i < asignaciones[posicion - 1][1].length; i++) {
+          for (var i = 0; i < asignaciones[posicion - 1][2]; i++) {
               //Se elige el número aleatorio usando cantidad de estudiantes
               elegido = random.nextInt(estudiantesSinAsignar.length);
               //Se agrega el estudiante de esa posición
@@ -594,14 +618,127 @@ void asignacionSeccion(List<List<dynamic>> asignaciones, List<String> estudiante
       break;
     
     case 2:
+      int posicion1, posicion2;
+      String nombre;
+        do{
+          for (var i = 0; i < temasNombre.length; i++) {
+            print("${i + 1}. ${temasNombre[i]}");
+          }
+          print("Ingrese el tema al cuál desea editar su asignación");
+          posicion = int.parse(stdin.readLineSync()!);
+          posicion = posicionIncorrecta(posicion, temasNombre);
+          if(asignaciones[posicion - 1][1].length > 0){
+            print("Tema: ${temasNombre[posicion - 1]}");
+            print(" Estudiantes:");
+            //mostrar los estudiantes que hay en la asignación
+            for (var i = 0; i < asignaciones[posicion - 1][1].length; i++) {
+              print("   ${i + 1}. ${asignaciones[posicion - 1][1][i]}");
+              }
+              print("Ingrese el estudiante que desea reemplazar");
+              posicion1 = int.parse(stdin.readLineSync()!);
+              posicion1 = posicionIncorrecta(posicion1, asignaciones[posicion - 1][1]);
+              //Se muestra la lista de estudiantes que no han sido asignados para reemplazarlo
+              for (var i = 0; i < estudiantesSinAsignar.length; i++) {
+                print("${i + 1}. ${estudiantesSinAsignar[i]}");
+              }
+              print("Ingrese el estudiante que desea ingresar a cambio de: ${asignaciones[posicion - 1][1][posicion1 - 1]}");
+              posicion2 = int.parse(stdin.readLineSync()!);
+              posicion2 = posicionIncorrecta(posicion2, estudiantes);
+              nombre = asignaciones[posicion - 1][1][posicion1 - 1];
+              asignaciones[posicion - 1][1][posicion1 - 1] = estudiantesSinAsignar[posicion2 - 1];
+              estudiantesSinAsignar.removeAt(posicion2 - 1);
+              estudiantesSinAsignar.add(nombre);
+              print("La asignación quedaría de la siguiente manera:");
+              print("Tema: ${temasNombre[posicion - 1]}");
+              for (var i = 0; i < asignaciones[posicion - 1][1].length; i++) {
+                print("${i + 1}. ${asignaciones[posicion - 1][1][i]}");
+              }
+              print("1. Crear otra asignación");
+              print("2. Salir");
+              opcion = int.parse(stdin.readLineSync()!);
+              opcion = volverIntentar(opcion);
+              }
+          
+        }while(opcion != 2);
+        break;
+    case 3:
       do{
-        for (var i = 0; i < temasNombre.length; i++) {
-          print("${i + 1}. ${temasNombre[i]}");
+        print("1. Eliminar asignación de un tema");
+        print("2. Eliminar asignación de todos los temas");
+        opcion = int.parse(stdin.readLineSync()!);
+        opcion = volverIntentar(opcion);
+        if(opcion == 1){
+          print("Temas:");
+          for (var i = 0; i < temasNombre.length; i++) {
+            print("${i + 1}. ${temasNombre[i]}");
+          }
+          print("Ingrese el tema al cuál desea eliminar su asignación");
+          posicion = int.parse(stdin.readLineSync()!);
+          posicion = posicionIncorrecta(posicion, temasNombre);
+          for (var i = 0; i < asignaciones[posicion - 1][1].length; i++) {
+            estudiantesSinAsignar.add(asignaciones[posicion - 1][1][i]);
+          }
+          asignaciones[posicion - 1][1] = [];
+          print("Se eliminaron todas las asignaciones del tema: ${temasNombre[posicion - 1]}");
+        }else{
+          for (var i = 0; i < asignaciones.length; i++) {
+            asignaciones[i][1] = [];
+          }
+          //Se ponen todos los estudiantes en estudiantes sin asignar
+          estudiantes = estudiantesSinAsignar;
+          print("Se eliminaron todas las asignaciones exitosamente");
         }
+        print("1. Eliminar otra asignación");
+        print("2. Salir");
+        opcion = int.parse(stdin.readLineSync()!);
+        opcion = volverIntentar(opcion);
+
       }while(opcion != 2);
       break;
-
+    //VER ASIGNACIONES
+    case 4:
+      for (var i = 0; i < asignaciones.length; i++) {
+        print("${temasNombre[i]}:");
+        for (var j = 0; j < asignaciones[i][1].length; j++) {
+          print(" ${j + 1}. ${asignaciones[i][1][j]}");
+        }
+      }
+      break;
+    //ASIGNAR TODOO
+    case 5:
+      do{
+        for (var i = 0; i < asignaciones.length; i++) {
+           for (var j = 0; j < asignaciones[i][1].length; j++) {
+              estudiantesSinAsignar.add(asignaciones[i][1][i]);
+            }
+            asignaciones[i][1] = [];
+            for (var j = 0; j < asignaciones[i][2]; j++) {
+              //Se elige el número aleatorio usando cantidad de estudiantes
+              elegido = random.nextInt(estudiantesSinAsignar.length);
+              //Se agrega el estudiante de esa posición
+              asignaciones[i][1].add(estudiantesSinAsignar[elegido]);
+              //Se elimina el estudiante de estudiantes sin asignar
+              estudiantesSinAsignar.removeAt(elegido);
+            }
+        }
+        print("Los temas quedaron asignados de la siguiente manera:");
+        for (var i = 0; i < asignaciones.length; i++) {
+          print("${temasNombre[i]}:");
+          for (var j = 0; j < asignaciones[i][1].length; j++) {
+            print(" ${j + 1}. ${asignaciones[i][1][j]}");
+          }
+        }
+        print("1. Volver a asignar");
+        print("2. Salir");
+        opcion = int.parse(stdin.readLineSync()!);
+        opcion = volverIntentar(opcion);
+      }while(opcion != 2);
+      break;
     case 6:
+      break;
+    
+    default:
+      print("Ingrese una opción correcta");
       break;
   }
 }
