@@ -3,81 +3,49 @@
   "packages": [
     {
       "name": "characters",
-<<<<<<< HEAD
       "rootUri": "file:///C:/Users/Juan/AppData/Local/Pub/Cache/hosted/pub.dev/characters-1.3.0",
-=======
-      "rootUri": "file:///C:/Users/Esteban/AppData/Local/Pub/Cache/hosted/pub.dev/characters-1.3.0",
->>>>>>> 763c5a4717417626f24896189ec8fc02f5ea57e0
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "clock",
-<<<<<<< HEAD
       "rootUri": "file:///C:/Users/Juan/AppData/Local/Pub/Cache/hosted/pub.dev/clock-1.1.1",
-=======
-      "rootUri": "file:///C:/Users/Esteban/AppData/Local/Pub/Cache/hosted/pub.dev/clock-1.1.1",
->>>>>>> 763c5a4717417626f24896189ec8fc02f5ea57e0
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "dart_console",
-<<<<<<< HEAD
       "rootUri": "file:///C:/Users/Juan/AppData/Local/Pub/Cache/hosted/pub.dev/dart_console-4.1.0",
-=======
-      "rootUri": "file:///C:/Users/Esteban/AppData/Local/Pub/Cache/hosted/pub.dev/dart_console-4.1.0",
->>>>>>> 763c5a4717417626f24896189ec8fc02f5ea57e0
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "ffi",
-<<<<<<< HEAD
       "rootUri": "file:///C:/Users/Juan/AppData/Local/Pub/Cache/hosted/pub.dev/ffi-2.1.2",
-=======
-      "rootUri": "file:///C:/Users/Esteban/AppData/Local/Pub/Cache/hosted/pub.dev/ffi-2.1.2",
->>>>>>> 763c5a4717417626f24896189ec8fc02f5ea57e0
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
     {
       "name": "intl",
-<<<<<<< HEAD
       "rootUri": "file:///C:/Users/Juan/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.19.0",
-=======
-      "rootUri": "file:///C:/Users/Esteban/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.19.0",
->>>>>>> 763c5a4717417626f24896189ec8fc02f5ea57e0
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "meta",
-<<<<<<< HEAD
       "rootUri": "file:///C:/Users/Juan/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.15.0",
-=======
-      "rootUri": "file:///C:/Users/Esteban/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.15.0",
->>>>>>> 763c5a4717417626f24896189ec8fc02f5ea57e0
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path",
-<<<<<<< HEAD
       "rootUri": "file:///C:/Users/Juan/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.9.0",
-=======
-      "rootUri": "file:///C:/Users/Esteban/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.9.0",
->>>>>>> 763c5a4717417626f24896189ec8fc02f5ea57e0
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "win32",
-<<<<<<< HEAD
       "rootUri": "file:///C:/Users/Juan/AppData/Local/Pub/Cache/hosted/pub.dev/win32-5.5.0",
-=======
-      "rootUri": "file:///C:/Users/Esteban/AppData/Local/Pub/Cache/hosted/pub.dev/win32-5.5.0",
->>>>>>> 763c5a4717417626f24896189ec8fc02f5ea57e0
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -88,13 +56,7 @@
       "languageVersion": "3.3"
     }
   ],
-<<<<<<< HEAD
-  "generated": "2024-06-30T00:02:17.244541Z",
+  "generated": "2024-07-04T14:39:02.673279Z",
   "generator": "pub",
   "generatorVersion": "3.3.3"
-=======
-  "generated": "2024-07-03T20:50:54.188424Z",
-  "generator": "pub",
-  "generatorVersion": "3.3.4"
->>>>>>> 763c5a4717417626f24896189ec8fc02f5ea57e0
 }

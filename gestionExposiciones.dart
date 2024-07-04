@@ -88,8 +88,7 @@ void main(List<String> args) {
   //DECLARACIÓN DE MATRIZ
   List<List<dynamic>> asignaciones = []; //Matriz para guardar las asignaciones con su respectiva cantidad de estudiantes y sus nombres
   //DECLARACIÓN DE VARIABLES
-  int opcion, posicion;
-  String tema, nombre;
+  int opcion;
   
   //Se guardarán los temas preestablecidos y una lista de nombres vacía en asignaciones
   for (var i = 0; i < temasNombre.length; i++) {
@@ -437,8 +436,8 @@ void estudiantesSeccion(int opcion, List<String> estudiantes, List<String> estud
     case 2:
       int posicion;
       do{
+        console.clearScreen();
         for (var i = 0; i < estudiantes.length; i++) {
-          console.clearScreen();
           console.setBackgroundColor(ConsoleColor.white); 
           console.setForegroundColor(ConsoleColor.black); 
           console.writeLine('${i + 1}. ${estudiantes[i]}', TextAlignment.left);
@@ -488,7 +487,6 @@ void estudiantesSeccion(int opcion, List<String> estudiantes, List<String> estud
         for (var i = 0; i < estudiantes.length; i++) {
           print("${i + 1}. ${estudiantes[i]}");
         }
-        console.clearScreen();
         console.setBackgroundColor(ConsoleColor.white); 
         console.setForegroundColor(ConsoleColor.red); 
         console.writeLine('Ingrese el número del estudiante que desea eliminar', TextAlignment.center);
@@ -525,7 +523,6 @@ void estudiantesSeccion(int opcion, List<String> estudiantes, List<String> estud
 
       //VER ESTUDIANTES
       case 4:
-        console.clearScreen();
         console.setBackgroundColor(ConsoleColor.white); 
         console.setForegroundColor(ConsoleColor.red); 
         console.writeLine('1. Ver estudiantes sin asignar', TextAlignment.center);
@@ -578,7 +575,6 @@ void cantEstudiantesSeccion(int opcion, List<String> temasNombre, List<List<dyna
       case 1:
         do{
           for (var i = 0; i < temasNombre.length; i++) {
-            console.clearScreen();
             console.setBackgroundColor(ConsoleColor.white); 
             console.setForegroundColor(ConsoleColor.green); 
             console.writeLine('${i + 1}. ${temasNombre[i]} -> ${asignaciones[i][2]}', TextAlignment.left);
@@ -686,9 +682,9 @@ void cantEstudiantesSeccion(int opcion, List<String> temasNombre, List<List<dyna
       }while(opcion != 2);
       break;
 
+    //VER CANTIDAD DE ESTUDIANTES
     case 3:
       for (var i = 0; i < temasNombre.length; i++) {
-        console.clearScreen();
         console.setBackgroundColor(ConsoleColor.white); 
         console.setForegroundColor(ConsoleColor.green); 
         console.writeLine('${i + 1}. ${temasNombre[i]} -> ${asignaciones[i][2]}', TextAlignment.center);
@@ -711,7 +707,6 @@ void cantEstudiantesSeccion(int opcion, List<String> temasNombre, List<List<dyna
 
 void asignacionSeccion(List<List<dynamic>> asignaciones, List<String> estudiantes,List<String> temasNombre,List<String> estudiantesSinAsignar, int opcion){
   int posicion;
-  int suma = 0;
   int elegido;
   //Se inicializa random
   Random random = Random();
@@ -719,8 +714,8 @@ void asignacionSeccion(List<List<dynamic>> asignaciones, List<String> estudiante
     //ASIGNAR POR TEMAS
     case 1:
       do{
+        console.clearScreen();
         for (var i = 0; i < temasNombre.length; i++) {
-          console.clearScreen();
           console.setBackgroundColor(ConsoleColor.white); 
           console.setForegroundColor(ConsoleColor.magenta); 
           console.writeLine('${i + 1}. ${temasNombre[i]}', TextAlignment.left);
@@ -799,7 +794,6 @@ void asignacionSeccion(List<List<dynamic>> asignaciones, List<String> estudiante
       String nombre;
         do{
           for (var i = 0; i < temasNombre.length; i++) {
-            console.clearScreen();
             console.setBackgroundColor(ConsoleColor.white); 
             console.setForegroundColor(ConsoleColor.magenta); 
             console.writeLine('${i + 1}. ${temasNombre[i]}', TextAlignment.left);
@@ -835,19 +829,16 @@ void asignacionSeccion(List<List<dynamic>> asignaciones, List<String> estudiante
                 console.writeLine('${i + 1}. ${estudiantesSinAsignar[i]}', TextAlignment.center);
                 
               }
-              console.clearScreen();
               console.setBackgroundColor(ConsoleColor.white); 
               console.setForegroundColor(ConsoleColor.magenta); 
               console.writeLine('Ingrese el estudiante que desea ingresar a cambio de: ${asignaciones[posicion - 1][1][posicion1 - 1]}', TextAlignment.center);
               posicion2 = int.parse(stdin.readLineSync()!);
               console.resetColorAttributes();
-              posicion2 = posicionIncorrecta(posicion2, estudiantes);
+              posicion2 = posicionIncorrecta(posicion2, estudiantesSinAsignar);
               nombre = asignaciones[posicion - 1][1][posicion1 - 1];
               asignaciones[posicion - 1][1][posicion1 - 1] = estudiantesSinAsignar[posicion2 - 1];
               estudiantesSinAsignar.removeAt(posicion2 - 1);
               estudiantesSinAsignar.add(nombre);
-
-              console.clearScreen();
               console.setBackgroundColor(ConsoleColor.magenta); 
               console.setForegroundColor(ConsoleColor.black); 
               console.writeLine('La asignación quedaría de la siguiente manera:', TextAlignment.center);
@@ -858,7 +849,6 @@ void asignacionSeccion(List<List<dynamic>> asignaciones, List<String> estudiante
               for (var i = 0; i < asignaciones[posicion - 1][1].length; i++) {
                 console.setBackgroundColor(ConsoleColor.white); 
                 console.setForegroundColor(ConsoleColor.magenta); 
-                console.writeLine('Tema: ${temasNombre[posicion - 1]}', TextAlignment.left);
                 console.writeLine('${i + 1}. ${asignaciones[posicion - 1][1][i]}', TextAlignment.left);
               
               }
@@ -934,13 +924,11 @@ void asignacionSeccion(List<List<dynamic>> asignaciones, List<String> estudiante
     //VER ASIGNACIONES
     case 4:
       for (var i = 0; i < asignaciones.length; i++) {
-        console.clearScreen();
         console.setBackgroundColor(ConsoleColor.white); 
         console.setForegroundColor(ConsoleColor.magenta); 
         console.writeLine('${temasNombre[i]}:', TextAlignment.center);
         console.resetColorAttributes();
         for (var j = 0; j < asignaciones[i][1].length; j++) {
-          console.clearScreen();
           console.setBackgroundColor(ConsoleColor.white); 
           console.setForegroundColor(ConsoleColor.magenta); 
           console.writeLine('${j + 1}. ${asignaciones[i][1][j]}', TextAlignment.center);
@@ -955,21 +943,24 @@ void asignacionSeccion(List<List<dynamic>> asignaciones, List<String> estudiante
       do{
         for (var i = 0; i < asignaciones.length; i++) {
            for (var j = 0; j < asignaciones[i][1].length; j++) {
-              estudiantesSinAsignar.add(asignaciones[i][1][i]);
+              estudiantesSinAsignar.add(asignaciones[i][1][j]); 
+              //se agregan todos los estudiantes que hayan sido asignados anteriormente a estudiante4s sin asignar
             }
             asignaciones[i][1] = [];
-            for (var j = 0; j < asignaciones[i][2]; j++) {
-              //Se elige el número aleatorio usando cantidad de estudiantes
-              elegido = random.nextInt(estudiantesSinAsignar.length);
-              //Se agrega el estudiante de esa posición
-              asignaciones[i][1].add(estudiantesSinAsignar[elegido]);
-              //Se elimina el estudiante de estudiantes sin asignar
-              estudiantesSinAsignar.removeAt(elegido);
-            }
+            //Luego se eliminan todos los estudiantes de la asignación
         }
-        console.clearScreen();
+        for (var i = 0; i < asignaciones.length; i++) {
+          for (var j = 0; j < asignaciones[i][2]; j++) {
+            //Se elige el número aleatorio usando cantidad de estudiantes
+            elegido = random.nextInt(estudiantesSinAsignar.length);
+            //Se agrega el estudiante de esa posición
+            asignaciones[i][1].add(estudiantesSinAsignar[elegido]);
+            //Se elimina el estudiante de estudiantes sin asignar
+            estudiantesSinAsignar.removeAt(elegido);
+          }
+        }
         console.setBackgroundColor(ConsoleColor.white); 
-        console.setForegroundColor(ConsoleColor.magenta); 
+        console.setForegroundColor(ConsoleColor.magenta);
         console.writeLine('Los temas quedaron asignados de la siguiente manera:', TextAlignment.center);
         for (var i = 0; i < asignaciones.length; i++) {
           console.writeLine('${temasNombre[i]}:', TextAlignment.center);
