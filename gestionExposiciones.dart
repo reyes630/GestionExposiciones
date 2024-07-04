@@ -658,6 +658,7 @@ void asignacionSeccion(List<List<dynamic>> asignaciones, List<String> estudiante
               opcion = int.parse(stdin.readLineSync()!);
               opcion = volverIntentar(opcion);
               }
+              
           
         }while(opcion != 2);
         break;
