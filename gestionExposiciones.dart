@@ -1,7 +1,8 @@
+
 import 'dart:io';
 import 'package:dart_console/dart_console.dart';
 import 'dart:math';
-
+//dart pub add dart_console -----> Instalar dar_console
 void main(List<String> args) {
   //JUAN DANIEL GÓMEZ Y ESTEBAN REYES - MINI PROYECTO TRIMESTRE 2
   //DECLARACIÓN DE LISTAS
@@ -120,6 +121,7 @@ void main(List<String> args) {
     asignaciones = [];
   }
   do {
+    console.clearScreen();
     console.setBackgroundColor(ConsoleColor.blue); // COLOR DE FONDO
     console.setForegroundColor(ConsoleColor.white); // COLOR DE FUENTE
     console.writeLine('MENÚ PRINCIPAL', TextAlignment.center); //ALI8NEACON DE TEXTO
@@ -131,9 +133,9 @@ void main(List<String> args) {
     console.writeLine('2. Estudiantes', TextAlignment.center);
     console.setForegroundColor(ConsoleColor.green);
     console.writeLine('3. Complejidad', TextAlignment.center);
-    console.setForegroundColor(ConsoleColor.yellow);
-    console.writeLine('4. Asignacion', TextAlignment.center);
     console.setForegroundColor(ConsoleColor.magenta);
+    console.writeLine('4. Asignacion', TextAlignment.center);
+    console.setForegroundColor(ConsoleColor.yellow);
     console.writeLine('0. Salir', TextAlignment.center);
     console.resetColorAttributes();
     opcion = int.parse(stdin.readLineSync()!);
@@ -196,7 +198,7 @@ void main(List<String> args) {
       
       case 4:
         do {
-          console.setBackgroundColor(ConsoleColor.yellow); // COLOR DE FONDO
+          console.setBackgroundColor(ConsoleColor.magenta); // COLOR DE FONDO
           console.setForegroundColor(ConsoleColor.black); // COLOR DE FUENTE
           console.writeLine('MENÚ ASIGNACION', TextAlignment.center); //ALINEACON DE TEXTO
           console.resetColorAttributes();
@@ -216,12 +218,16 @@ void main(List<String> args) {
             suma += numero;
           }
           if(suma < estudiantes.length){
-            print("Falta agregar ${estudiantes.length - suma} estudiantes");
-            print("Vuelva a complejidad y solucione este problema");
+            console.setBackgroundColor(ConsoleColor.red); // COLOR DE FONDO
+            console.setForegroundColor(ConsoleColor.white); // COLOR DE FUENTE
+            console.writeLine('Falta agregar ${estudiantes.length - suma} estudiantes', TextAlignment.center);
+            console.writeLine('Vuelva a complejidad y solucione este problema', TextAlignment.center);
             opcion = 5;
           }else if(suma > estudiantes.length){
-            print("Sobran ${suma - estudiantes.length} estudiantes");
-            print("Vuelva a complejidad y solucione este problema");
+            console.setBackgroundColor(ConsoleColor.red); // COLOR DE FONDO
+            console.setForegroundColor(ConsoleColor.white); // COLOR DE FUENTE
+            console.writeLine('Sobran ${suma - estudiantes.length} estudiantes', TextAlignment.center);
+            console.writeLine('Vuelva a complejidad y solucione este problema', TextAlignment.center);
             opcion = 5;
           }
           asignacionSeccion(asignaciones, estudiantes, temasNombre, estudiantesSinAsignar, opcion);
@@ -229,21 +235,28 @@ void main(List<String> args) {
         break;
       
       case 0:
-        print("Hasta luego");
+        console.setBackgroundColor(ConsoleColor.blue); // COLOR DE FONDO
+        console.setForegroundColor(ConsoleColor.black); // COLOR DE FUENTE
+        console.writeLine('Hasta luego', TextAlignment.center);
         break;
       
       default:
-        print("ingrese una opción correcta");
+        console.setBackgroundColor(ConsoleColor.red); // COLOR DE FONDO
+        console.setForegroundColor(ConsoleColor.black); // COLOR DE FUENTE
+        console.writeLine('ingrese una opción correcta', TextAlignment.center);
         break;
     }
   } while (opcion != 0);
 }
 
+final console = Console(); //Inicializar consola
 int volverIntentar(int opcion){
   if(opcion != 1 && opcion != 2){
     do {
       if (opcion != 1 && opcion != 2) {
-        print("Ingrese una opción correcta");
+        console.setBackgroundColor(ConsoleColor.red); 
+        console.setForegroundColor(ConsoleColor.black); 
+        console.writeLine('Ingrese una opción correcta', TextAlignment.center);
         opcion = int.parse(stdin.readLineSync()!);
       }
     } while (opcion != 1 && opcion != 2);
@@ -251,11 +264,12 @@ int volverIntentar(int opcion){
   return opcion;
 }
 
-
 int posicionIncorrecta(int posicion, List lista){
   if(posicion > lista.length || posicion <= 0){
     do {
-      print("Ingrese una posición correcta");
+      console.setBackgroundColor(ConsoleColor.red); 
+      console.setForegroundColor(ConsoleColor.black); 
+      console.writeLine('Ingrese una posición correcta', TextAlignment.center);
       posicion = int.parse(stdin.readLineSync()!);
     } while (posicion > lista.length || posicion < 0);
   }
@@ -268,12 +282,19 @@ void temasSeccion(int opcion, List<String> temasNombre, List<String> estudiantes
   //CREAR TEMAS 
     case 1:
       do {
-        print("Ingrese el nombre del tema que desea agregar");
+        console.clearScreen();
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.black); 
+        console.writeLine('Ingrese el nombre del tema que desea agregar', TextAlignment.center); 
+        console.resetColorAttributes();
         tema = stdin.readLineSync()!;
         temasNombre.add(tema);
         asignaciones.add([tema, [], 0]);
-        print("1. Ingresar nuevo tema");
-        print("2. Salir");
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.black); 
+        console.writeLine('1. Ingresar nuevo tema', TextAlignment.center);
+        console.writeLine('2. Salir', TextAlignment.center);
+        console.resetColorAttributes();
         opcion = int.parse(stdin.readLineSync()!);
         opcion = volverIntentar(opcion);//funcion para comprobar que ingrese una opción correcta
       } while (opcion != 2);
@@ -284,19 +305,29 @@ void temasSeccion(int opcion, List<String> temasNombre, List<String> estudiantes
       int posicion;
       String nombre;
       do {
-        print("Temas actuales:");
+        console.clearScreen();
+        console.setBackgroundColor(ConsoleColor.black); 
+        console.setForegroundColor(ConsoleColor.white); 
+        console.writeLine('Temas actuales:"', TextAlignment.center);
         for (var i = 0; i < temasNombre.length; i++) {
-          print("${i + 1}. ${temasNombre[i]}");
+          console.setBackgroundColor(ConsoleColor.white); 
+          console.setForegroundColor(ConsoleColor.black); 
+          console.writeLine('${i + 1}. ${temasNombre[i]}', TextAlignment.center);
+          console.resetColorAttributes();
+          
         }
-        print("Ingrese el número del tema que desea editar");
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.black); 
+        console.writeLine('Ingrese el número del tema que desea editar', TextAlignment.center);
         posicion = int.parse(stdin.readLineSync()!);
         posicion = posicionIncorrecta(posicion, temasNombre);
-        print("Ingrese el nuevo nombre de el tema: ${temasNombre[posicion - 1]}");
+        console.writeLine('Ingrese el nuevo nombre de el tema: ${temasNombre[posicion - 1]}', TextAlignment.center);
         nombre = stdin.readLineSync()!;
         temasNombre[posicion - 1] = nombre;
         asignaciones[posicion - 1][0] = nombre;
-        print("1. Editar otro tema");
-        print("2. Salir");
+        console.writeLine('1. Ingresar nuevo tema', TextAlignment.center);
+        console.writeLine('2. Salir', TextAlignment.center);
+        console.resetColorAttributes();
         opcion = int.parse(stdin.readLineSync()!);
         opcion = volverIntentar(opcion);
       } while (opcion != 2);
@@ -307,12 +338,21 @@ void temasSeccion(int opcion, List<String> temasNombre, List<String> estudiantes
       int posicion;
       String nombre;
       do {
-        print("Temas actuales:");
+        console.clearScreen();
+        console.setBackgroundColor(ConsoleColor.black); 
+        console.setForegroundColor(ConsoleColor.white); 
+        console.writeLine('Temas actuales:"', TextAlignment.center);
         for (var i = 0; i < temasNombre.length; i++) {
-          print("${i + 1}. ${temasNombre[i]}");
+          console.setBackgroundColor(ConsoleColor.white); 
+          console.setForegroundColor(ConsoleColor.black); 
+          console.writeLine('${i + 1}. ${temasNombre[i]}', TextAlignment.center);
+          console.resetColorAttributes();
         }
-        print("Ingrese el número del tema que desea eliminar");
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.black); 
+        console.writeLine('Ingrese el número del tema que desea eliminar', TextAlignment.center);
         posicion = int.parse(stdin.readLineSync()!);
+        console.resetColorAttributes();
         posicion = posicionIncorrecta(posicion, temasNombre);
         nombre = temasNombre[posicion - 1];
         temasNombre.removeAt(posicion - 1);
@@ -324,43 +364,70 @@ void temasSeccion(int opcion, List<String> temasNombre, List<String> estudiantes
         }
         //Ahora si se puede borrar el tema dentro de la asignación
         asignaciones.removeAt(posicion - 1);
-        print("Se eliminó el tema: $nombre");
-        print("1. Eliminar otro tema");
-        print("2. Salir");
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.black); 
+        console.writeLine('Se eliminó el tema: $nombre', TextAlignment.center);
+        console.writeLine('1. Eliminar otro tema', TextAlignment.center);
+        console.writeLine('2. Salir', TextAlignment.center);
         opcion = int.parse(stdin.readLineSync()!);
         opcion = volverIntentar(opcion);
+        console.resetColorAttributes();
       } while (opcion != 2);
       break;
 
   //VER TEMAS 
     case 4:
-      print("Temas actuales:");
+      console.clearScreen();
+      console.setBackgroundColor(ConsoleColor.black); 
+      console.setForegroundColor(ConsoleColor.white); 
+      console.writeLine('Temas actuales:', TextAlignment.center);
       for (var i = 0; i < temasNombre.length; i++) {
-        print("${i + 1}. ${temasNombre[i]}");
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.black); 
+        console.writeLine('${i + 1}. ${temasNombre[i]}', TextAlignment.center);
+        console.resetColorAttributes();
+        
       }
       break;
   
   //SALIR
     case 5:
+      console.clearScreen();
+      console.setBackgroundColor(ConsoleColor.blue);
+      console.setForegroundColor(ConsoleColor.white);
+      console.writeLine('Saliendo...', TextAlignment.center);
+      console.resetColorAttributes();
       break;
     default:
-      print("Ingrese una opción correcta");
+      console.clearScreen();
+      console.setBackgroundColor(ConsoleColor.red); 
+      console.setForegroundColor(ConsoleColor.black); 
+      console.writeLine('Ingrese una opción correcta', TextAlignment.center);
+      console.resetColorAttributes();
       break;
   }
 
 }
+
 void estudiantesSeccion(int opcion, List<String> estudiantes, List<String> estudiantesSinAsignar, List<List<dynamic>> asignaciones){
   String nombre;
   switch(opcion){
     //AGREGAR ESTUDIANTE
     case 1:
       do{
-        print("Ingrese el nombre completo del nuevo estudiante");
+        console.clearScreen();
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.red); 
+        console.writeLine('Ingrese el nombre completo del nuevo estudiante', TextAlignment.center);
+        console.resetColorAttributes();
         nombre = stdin.readLineSync()!;
         estudiantes.add(nombre);
         estudiantesSinAsignar.add(nombre);
-        print("1. Agregar otro estudiante");
-        print("2. Salir");
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.red); 
+        console.writeLine('1. Agregar otro estudiante', TextAlignment.center);
+        console.writeLine('2. Salir', TextAlignment.center);
+        console.resetColorAttributes();
         opcion = int.parse(stdin.readLineSync()!);
         opcion = volverIntentar(opcion);
       }while(opcion != 2);
@@ -371,13 +438,23 @@ void estudiantesSeccion(int opcion, List<String> estudiantes, List<String> estud
       int posicion;
       do{
         for (var i = 0; i < estudiantes.length; i++) {
-          print("${i + 1}. ${estudiantes[i]}");
+          console.clearScreen();
+          console.setBackgroundColor(ConsoleColor.white); 
+          console.setForegroundColor(ConsoleColor.black); 
+          console.writeLine('${i + 1}. ${estudiantes[i]}', TextAlignment.left);
+          console.resetColorAttributes();
         }
-        print("Ingrese el número del estudiante que desea editar");
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.red); 
+        console.writeLine('Ingrese el número del estudiante que desea editar', TextAlignment.center);
         posicion = int.parse(stdin.readLineSync()!);
+        console.resetColorAttributes();
         posicion = posicionIncorrecta(posicion, estudiantes);
-        print("Ingrese el nuevo nombre del estudiante: ${estudiantes[posicion - 1]}");
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.red); 
+        console.writeLine('Ingrese el nuevo nombre del estudiante: ${estudiantes[posicion - 1]}', TextAlignment.left);
         nombre = stdin.readLineSync()!;
+        console.resetColorAttributes();
         //Se buscará si el nombre ya está asignado para ser cambiado
         for (var i = 0; i < asignaciones.length; i++) {
           for (var j = 0; j < asignaciones[i][1].length; j++) {
@@ -393,8 +470,11 @@ void estudiantesSeccion(int opcion, List<String> estudiantes, List<String> estud
           }
         }
         estudiantes[posicion - 1] = nombre;
-        print("1. Editar otro nombre");
-        print("2. Salir");
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.red); 
+        console.writeLine('1. Editar otro nombre', TextAlignment.center);
+        console.writeLine('2. Salir', TextAlignment.center);
+        console.resetColorAttributes();
         opcion = int.parse(stdin.readLineSync()!);
         opcion = volverIntentar(opcion);
       }while(opcion != 2);
@@ -408,7 +488,10 @@ void estudiantesSeccion(int opcion, List<String> estudiantes, List<String> estud
         for (var i = 0; i < estudiantes.length; i++) {
           print("${i + 1}. ${estudiantes[i]}");
         }
-        print("Ingrese el número del estudiante que desea eliminar");
+        console.clearScreen();
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.red); 
+        console.writeLine('Ingrese el número del estudiante que desea eliminar', TextAlignment.center);
         posicion = int.parse(stdin.readLineSync()!);
         posicion = posicionIncorrecta(posicion, estudiantes);
         nombre = estudiantes[posicion - 1];
@@ -429,9 +512,12 @@ void estudiantesSeccion(int opcion, List<String> estudiantes, List<String> estud
           }
         }
         estudiantes.removeAt(posicion - 1);
-        print("Ha sido eliminado el estudiante: $nombre");
-        print("1. Eliminar otro nombre");
-        print("2. Salir");
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.red); 
+        console.writeLine('Ha sido eliminado el estudiante: $nombre', TextAlignment.center);
+        console.writeLine('1. Eliminar otro nombre', TextAlignment.center);
+        console.writeLine('2. Salir', TextAlignment.center);
+        console.resetColorAttributes();
         opcion = int.parse(stdin.readLineSync()!);
         opcion = volverIntentar(opcion);
       }while(opcion != 2);
@@ -439,29 +525,48 @@ void estudiantesSeccion(int opcion, List<String> estudiantes, List<String> estud
 
       //VER ESTUDIANTES
       case 4:
-        print("1. Ver estudiantes sin asignar");
-        print("2. Ver todos los estudiantes");
+        console.clearScreen();
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.red); 
+        console.writeLine('1. Ver estudiantes sin asignar', TextAlignment.center);
+        console.writeLine('2. Ver todos los estudiantes', TextAlignment.center);
         opcion = int.parse(stdin.readLineSync()!);
+        console.resetColorAttributes();
         opcion = volverIntentar(opcion);
         if(opcion == 1){
-          print("Estudiantes sin asignar:");
+          console.setBackgroundColor(ConsoleColor.white); 
+          console.setForegroundColor(ConsoleColor.red); 
+          console.writeLine('Estudiantes sin asignar:', TextAlignment.center);
           for (var i = 0; i < estudiantesSinAsignar.length; i++) {
-            print("${i + 1}. ${estudiantes[i]}");
+            console.writeLine('${i + 1}. ${estudiantes[i]}', TextAlignment.left);
+            console.resetColorAttributes();
           }
         }else{
-          print("Todos los estudiantes:");
+          console.setBackgroundColor(ConsoleColor.white); 
+          console.setForegroundColor(ConsoleColor.red); 
+          console.writeLine('Todos los estudiantes:', TextAlignment.center);
           for (var i = 0; i < estudiantes.length; i++) {
-            print("${i + 1}. ${estudiantes[i]}");
+            console.writeLine('${i + 1}. ${estudiantes[i]}', TextAlignment.left);
+            console.resetColorAttributes();
           }
         }
         break;
       
       //SALIR
       case 5:
+        console.clearScreen();
+        console.setBackgroundColor(ConsoleColor.blue);
+        console.setForegroundColor(ConsoleColor.white);
+        console.writeLine('Saliendo...', TextAlignment.center);
+        console.resetColorAttributes();
         break;
       
       default:
-        print("Ingrese una opcion correcta");
+        console.clearScreen();
+        console.setBackgroundColor(ConsoleColor.red); 
+        console.setForegroundColor(ConsoleColor.black); 
+        console.writeLine('Ingrese una opción correcta', TextAlignment.center);
+        console.resetColorAttributes();
         break;
   }
 }
@@ -473,43 +578,68 @@ void cantEstudiantesSeccion(int opcion, List<String> temasNombre, List<List<dyna
       case 1:
         do{
           for (var i = 0; i < temasNombre.length; i++) {
-            print("${i + 1}. ${temasNombre[i]} -> ${asignaciones[i][2]}");
+            console.clearScreen();
+            console.setBackgroundColor(ConsoleColor.white); 
+            console.setForegroundColor(ConsoleColor.green); 
+            console.writeLine('${i + 1}. ${temasNombre[i]} -> ${asignaciones[i][2]}', TextAlignment.left);
+            console.resetColorAttributes();
           }
-          print("Ingrese el tema al que le quiere ingresar la cantidad de estudiantes");
+          console.setBackgroundColor(ConsoleColor.white); 
+          console.setForegroundColor(ConsoleColor.green); 
+          console.writeLine('Ingrese el tema al que le quiere ingresar la cantidad de estudiantes', TextAlignment.center);
           posicion = int.parse(stdin.readLineSync()!);
+          console.resetColorAttributes();
           posicion = posicion = posicionIncorrecta(posicion, temasNombre);
           //Comprobar si ya tiene una cantidad asignada
           if(asignaciones[posicion - 1][2] > 0){
-            print("Este tema ya tiene una cantidad de estudiantes asignado, ¿desea asignarlo nuevamente?");
-            print("1. Sí");
-            print("2. no");
+            console.setBackgroundColor(ConsoleColor.white); 
+            console.setForegroundColor(ConsoleColor.green); 
+            console.writeLine('Este tema ya tiene una cantidad de estudiantes asignado, ¿desea asignarlo nuevamente?', TextAlignment.center);
+            console.writeLine('1. Sí', TextAlignment.center);
+            console.writeLine('2. no', TextAlignment.center);
+          
             opcion = int.parse(stdin.readLineSync()!);
             opcion = volverIntentar(opcion);
             if(opcion == 1){
-              print("Ingrese cuantos estudiantes va a tener este tema");
+              console.setBackgroundColor(ConsoleColor.white); 
+              console.setForegroundColor(ConsoleColor.green); 
+              console.writeLine('Ingrese cuantos estudiantes va a tener este tema', TextAlignment.center);
               complejidad = int.parse(stdin.readLineSync()!);
+              console.resetColorAttributes();
               if(complejidad < 0){
               do {
-                print("Ingrese un número positivo");
+                console.setBackgroundColor(ConsoleColor.red); 
+                console.setForegroundColor(ConsoleColor.white); 
+                console.writeLine('Ingrese un número positivo', TextAlignment.center);
                 complejidad = int.parse(stdin.readLineSync()!);
+                console.resetColorAttributes();
               } while (complejidad < 0);
             }
               asignaciones[posicion - 1][2] = complejidad;
             }
           }else{
-            print("Ingrese cuantos estudiantes va a tener este tema");
+            console.setBackgroundColor(ConsoleColor.white); 
+            console.setForegroundColor(ConsoleColor.green); 
+            console.writeLine('Ingrese cuantos estudiantes va a tener este tema', TextAlignment.center);
             complejidad = int.parse(stdin.readLineSync()!);
             if(complejidad < 0){
               do {
-                print("Ingrese un número positivo");
+                console.setBackgroundColor(ConsoleColor.red); 
+                console.setForegroundColor(ConsoleColor.white); 
+                console.writeLine('Ingrese un número positivo', TextAlignment.center);
                 complejidad = int.parse(stdin.readLineSync()!);
+                console.resetColorAttributes();
               } while (complejidad < 0);
             }
             asignaciones[posicion - 1][2] = complejidad;
           }
-          print("El tema ${temasNombre[posicion - 1]} ha sido asignado con ${asignaciones[posicion - 1][2]} estudiantes");
-          print("1. Agregar otra asignación");
-          print("2. Salir");
+          console.clearScreen();
+          console.setBackgroundColor(ConsoleColor.white); 
+          console.setForegroundColor(ConsoleColor.green); 
+          console.writeLine('El tema ${temasNombre[posicion - 1]} ha sido asignado con ${asignaciones[posicion - 1][2]} estudiantes', TextAlignment.center);
+          console.writeLine('1. Agregar otra asignación', TextAlignment.center);
+          console.writeLine('2. Salir', TextAlignment.center);
+            
           opcion = int.parse(stdin.readLineSync()!);
           opcion = volverIntentar(opcion);
       }while(opcion != 2);
@@ -519,23 +649,38 @@ void cantEstudiantesSeccion(int opcion, List<String> temasNombre, List<List<dyna
     case 2:
       do{
         for (var i = 0; i < temasNombre.length; i++) {
-            print("${i + 1}. ${temasNombre[i]} -> ${asignaciones[i][2]}");
+            console.setBackgroundColor(ConsoleColor.white); 
+            console.setForegroundColor(ConsoleColor.green); 
+            console.writeLine('${i + 1}. ${temasNombre[i]} -> ${asignaciones[i][2]}', TextAlignment.left);
+            console.resetColorAttributes();
+
         }
-        print("Ingrese el tema al que le quiere le quiere cambiar la cantidad de estudiantes");
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.green); 
+        console.writeLine('Ingrese el tema al que le quiere le quiere cambiar la cantidad de estudiantes', TextAlignment.center);
         posicion = int.parse(stdin.readLineSync()!);
+        console.resetColorAttributes();
         posicion = posicionIncorrecta(posicion, temasNombre);
-        print("Ingrese la cantidad de estudiantes que va a tener");
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.green); 
+        console.writeLine('Ingrese la cantidad de estudiantes que va a tener', TextAlignment.center);
         complejidad = int.parse(stdin.readLineSync()!);
         if(complejidad < 0){
           do {
-            print("Ingrese un número positivo");
+            console.setBackgroundColor(ConsoleColor.red); 
+            console.setForegroundColor(ConsoleColor.white); 
+            console.writeLine('Ingrese un número positivo', TextAlignment.center);
             complejidad = int.parse(stdin.readLineSync()!);
+            console.resetColorAttributes();
           } while (complejidad < 0);
         }
         asignaciones[posicion - 1][2] = complejidad;
-        print("El tema ${temasNombre[posicion - 1]} ha sido asignado con ${asignaciones[posicion - 1][2]} estudiantes");
-        print("1. Agregar otra asignación");
-        print("2. Salir");
+        console.clearScreen();
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.green); 
+        console.writeLine('El tema ${temasNombre[posicion - 1]} ha sido asignado con ${asignaciones[posicion - 1][2]} estudiantes', TextAlignment.center);
+        console.writeLine('1. Agregar otra asignación', TextAlignment.center);
+        console.writeLine('2. Salir', TextAlignment.center);
         opcion = int.parse(stdin.readLineSync()!);
         opcion = volverIntentar(opcion);
       }while(opcion != 2);
@@ -543,7 +688,11 @@ void cantEstudiantesSeccion(int opcion, List<String> temasNombre, List<List<dyna
 
     case 3:
       for (var i = 0; i < temasNombre.length; i++) {
-        print("${i + 1}. ${temasNombre[i]} -> ${asignaciones[i][2]}");
+        console.clearScreen();
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.green); 
+        console.writeLine('${i + 1}. ${temasNombre[i]} -> ${asignaciones[i][2]}', TextAlignment.center);
+        console.resetColorAttributes();
       }
       break;
     
@@ -551,7 +700,11 @@ void cantEstudiantesSeccion(int opcion, List<String> temasNombre, List<List<dyna
       break;
     
     default:
-      print("Ingrese una opción correcta");
+      console.setBackgroundColor(ConsoleColor.red); 
+      console.setForegroundColor(ConsoleColor.black); 
+      console.writeLine('Ingrese una opción correcta', TextAlignment.center);
+      console.resetColorAttributes();
+      
       break;
   }
 }
@@ -567,17 +720,28 @@ void asignacionSeccion(List<List<dynamic>> asignaciones, List<String> estudiante
     case 1:
       do{
         for (var i = 0; i < temasNombre.length; i++) {
-          print("${i + 1}. ${temasNombre[i]}");
+          console.clearScreen();
+          console.setBackgroundColor(ConsoleColor.white); 
+          console.setForegroundColor(ConsoleColor.magenta); 
+          console.writeLine('${i + 1}. ${temasNombre[i]}', TextAlignment.left);
+          console.resetColorAttributes();
         }
-        print("Ingrese el tema que desea asignar");
+        
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.magenta); 
+        console.writeLine('Ingrese el tema que desea asignar', TextAlignment.left);
         posicion = int.parse(stdin.readLineSync()!);
+        console.resetColorAttributes();
         posicion = posicionIncorrecta(posicion, temasNombre);
         //Comprobar que no hayan estudiantes asignados
         if(asignaciones[posicion - 1][1].length > 0){
-          print("Ya tiene estudiantes asignados, ¿desea asignar nuevamente?");
-          print("1. sí");
-          print("2. No");
+          console.setBackgroundColor(ConsoleColor.white); 
+          console.setForegroundColor(ConsoleColor.magenta); 
+          console.writeLine('Ya tiene estudiantes asignados, ¿desea asignar nuevamente?', TextAlignment.left);
+          console.writeLine('1. sí', TextAlignment.left);
+          console.writeLine('2. No', TextAlignment.left);
           opcion = int.parse(stdin.readLineSync()!);
+          console.resetColorAttributes();
           opcion = volverIntentar(opcion);
           if(opcion == 1){
             //Se eliminan todos los estudiantes que hayan, no sin antes guardarlos en estudiantes sin asignar
@@ -605,56 +769,103 @@ void asignacionSeccion(List<List<dynamic>> asignaciones, List<String> estudiante
           }
         }
         //Se muestra cómo quedó asignado
-        print("La asignación quedó de la siguiente manera:");
-        print("Tema: ${temasNombre[posicion - 1]}");
+        console.clearScreen();
+        console.setBackgroundColor(ConsoleColor.magenta); 
+        console.setForegroundColor(ConsoleColor.black); 
+        console.writeLine('La asignación quedó de la siguiente manera:', TextAlignment.center);
+        console.resetColorAttributes();
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.magenta); 
+        console.writeLine('Tema: ${temasNombre[posicion - 1]}', TextAlignment.left);
+  
         for (var i = 0; i < asignaciones[posicion - 1][1].length; i++) {
-          print("${i + 1}. ${asignaciones[posicion - 1][1][i]}");
+          console.setBackgroundColor(ConsoleColor.white); 
+          console.setForegroundColor(ConsoleColor.magenta); 
+          console.writeLine('${i + 1}. ${asignaciones[posicion - 1][1][i]}', TextAlignment.left);
         }
-        print("1. Crear otra asignación");
-        print("2. Salir");
+        console.setBackgroundColor(ConsoleColor.magenta); 
+        console.setForegroundColor(ConsoleColor.black); 
+        console.writeLine('1. Crear otra asignación', TextAlignment.center);
+        console.writeLine('2. Salir', TextAlignment.center);
         opcion = int.parse(stdin.readLineSync()!);
+        console.resetColorAttributes();
         opcion = volverIntentar(opcion);
       }while(opcion != 2);
       break;
     
+    //EDITAR ASIGANCION
     case 2:
       int posicion1, posicion2;
       String nombre;
         do{
           for (var i = 0; i < temasNombre.length; i++) {
-            print("${i + 1}. ${temasNombre[i]}");
+            console.clearScreen();
+            console.setBackgroundColor(ConsoleColor.white); 
+            console.setForegroundColor(ConsoleColor.magenta); 
+            console.writeLine('${i + 1}. ${temasNombre[i]}', TextAlignment.left);
+            console.resetColorAttributes();
           }
-          print("Ingrese el tema al cuál desea editar su asignación");
+          console.setBackgroundColor(ConsoleColor.white); 
+          console.setForegroundColor(ConsoleColor.magenta); 
+          console.writeLine('Ingrese el tema al cuál desea editar su asignación', TextAlignment.center);
+          console.resetColorAttributes();
           posicion = int.parse(stdin.readLineSync()!);
           posicion = posicionIncorrecta(posicion, temasNombre);
           if(asignaciones[posicion - 1][1].length > 0){
-            print("Tema: ${temasNombre[posicion - 1]}");
-            print(" Estudiantes:");
+            console.setBackgroundColor(ConsoleColor.white); 
+            console.setForegroundColor(ConsoleColor.magenta); 
+            console.writeLine('Tema: ${temasNombre[posicion - 1]}', TextAlignment.left);
+            console.writeLine('Estudiantes:', TextAlignment.left);
+          
             //mostrar los estudiantes que hay en la asignación
             for (var i = 0; i < asignaciones[posicion - 1][1].length; i++) {
-              print("   ${i + 1}. ${asignaciones[posicion - 1][1][i]}");
+              console.writeLine(' ${i + 1}. ${asignaciones[posicion - 1][1][i]}', TextAlignment.left);
+              
               }
-              print("Ingrese el estudiante que desea reemplazar");
+              console.setBackgroundColor(ConsoleColor.white); 
+              console.setForegroundColor(ConsoleColor.magenta); 
+              console.writeLine('Ingrese el estudiante que desea reemplazar', TextAlignment.center);
               posicion1 = int.parse(stdin.readLineSync()!);
+              console.resetColorAttributes();
               posicion1 = posicionIncorrecta(posicion1, asignaciones[posicion - 1][1]);
               //Se muestra la lista de estudiantes que no han sido asignados para reemplazarlo
               for (var i = 0; i < estudiantesSinAsignar.length; i++) {
-                print("${i + 1}. ${estudiantesSinAsignar[i]}");
+                console.setBackgroundColor(ConsoleColor.white); 
+                console.setForegroundColor(ConsoleColor.black); 
+                console.writeLine('${i + 1}. ${estudiantesSinAsignar[i]}', TextAlignment.center);
+                
               }
-              print("Ingrese el estudiante que desea ingresar a cambio de: ${asignaciones[posicion - 1][1][posicion1 - 1]}");
+              console.clearScreen();
+              console.setBackgroundColor(ConsoleColor.white); 
+              console.setForegroundColor(ConsoleColor.magenta); 
+              console.writeLine('Ingrese el estudiante que desea ingresar a cambio de: ${asignaciones[posicion - 1][1][posicion1 - 1]}', TextAlignment.center);
               posicion2 = int.parse(stdin.readLineSync()!);
+              console.resetColorAttributes();
               posicion2 = posicionIncorrecta(posicion2, estudiantes);
               nombre = asignaciones[posicion - 1][1][posicion1 - 1];
               asignaciones[posicion - 1][1][posicion1 - 1] = estudiantesSinAsignar[posicion2 - 1];
               estudiantesSinAsignar.removeAt(posicion2 - 1);
               estudiantesSinAsignar.add(nombre);
-              print("La asignación quedaría de la siguiente manera:");
-              print("Tema: ${temasNombre[posicion - 1]}");
+
+              console.clearScreen();
+              console.setBackgroundColor(ConsoleColor.magenta); 
+              console.setForegroundColor(ConsoleColor.black); 
+              console.writeLine('La asignación quedaría de la siguiente manera:', TextAlignment.center);
+              console.resetColorAttributes();
+              console.setBackgroundColor(ConsoleColor.white); 
+              console.setForegroundColor(ConsoleColor.magenta); 
+              console.writeLine('Tema: ${temasNombre[posicion - 1]}', TextAlignment.left);
               for (var i = 0; i < asignaciones[posicion - 1][1].length; i++) {
-                print("${i + 1}. ${asignaciones[posicion - 1][1][i]}");
+                console.setBackgroundColor(ConsoleColor.white); 
+                console.setForegroundColor(ConsoleColor.magenta); 
+                console.writeLine('Tema: ${temasNombre[posicion - 1]}', TextAlignment.left);
+                console.writeLine('${i + 1}. ${asignaciones[posicion - 1][1][i]}', TextAlignment.left);
+              
               }
-              print("1. Crear otra asignación");
-              print("2. Salir");
+              console.setBackgroundColor(ConsoleColor.magenta); 
+              console.setForegroundColor(ConsoleColor.black); 
+              console.writeLine('1. Crear otra asignación', TextAlignment.center);
+              console.writeLine('2. Salir', TextAlignment.center);
               opcion = int.parse(stdin.readLineSync()!);
               opcion = volverIntentar(opcion);
               }
@@ -662,36 +873,60 @@ void asignacionSeccion(List<List<dynamic>> asignaciones, List<String> estudiante
           
         }while(opcion != 2);
         break;
+    
+    //ELIMINAR ASIGNACION 
     case 3:
       do{
-        print("1. Eliminar asignación de un tema");
-        print("2. Eliminar asignación de todos los temas");
+        console.clearScreen();
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.magenta); 
+        console.writeLine('1. Eliminar asignación de un tema', TextAlignment.center);
+        console.writeLine('2. Eliminar asignación de todos los temas', TextAlignment.center);
+    
         opcion = int.parse(stdin.readLineSync()!);
         opcion = volverIntentar(opcion);
         if(opcion == 1){
-          print("Temas:");
+          console.writeLine('Temas:', TextAlignment.center);
+        
           for (var i = 0; i < temasNombre.length; i++) {
-            print("${i + 1}. ${temasNombre[i]}");
+            console.setBackgroundColor(ConsoleColor.white); 
+            console.setForegroundColor(ConsoleColor.magenta); 
+            console.writeLine('${i + 1}. ${temasNombre[i]}', TextAlignment.left);
+            
           }
-          print("Ingrese el tema al cuál desea eliminar su asignación");
+          console.setBackgroundColor(ConsoleColor.white); 
+          console.setForegroundColor(ConsoleColor.magenta); 
+          console.writeLine('Ingrese el tema al cuál desea eliminar su asignación', TextAlignment.center);
+        
           posicion = int.parse(stdin.readLineSync()!);
           posicion = posicionIncorrecta(posicion, temasNombre);
           for (var i = 0; i < asignaciones[posicion - 1][1].length; i++) {
             estudiantesSinAsignar.add(asignaciones[posicion - 1][1][i]);
           }
           asignaciones[posicion - 1][1] = [];
-          print("Se eliminaron todas las asignaciones del tema: ${temasNombre[posicion - 1]}");
+          console.setBackgroundColor(ConsoleColor.white); 
+          console.setForegroundColor(ConsoleColor.magenta); 
+          console.writeLine('Se eliminaron todas las asignaciones del tema: ${temasNombre[posicion - 1]}', TextAlignment.center);
+          
+          
         }else{
           for (var i = 0; i < asignaciones.length; i++) {
             asignaciones[i][1] = [];
           }
           //Se ponen todos los estudiantes en estudiantes sin asignar
           estudiantes = estudiantesSinAsignar;
-          print("Se eliminaron todas las asignaciones exitosamente");
+          console.setBackgroundColor(ConsoleColor.white); 
+          console.setForegroundColor(ConsoleColor.magenta); 
+          console.writeLine('Se eliminaron todas las asignaciones exitosamente', TextAlignment.center);
+        
         }
-        print("1. Eliminar otra asignación");
-        print("2. Salir");
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.magenta); 
+        console.writeLine('1. Eliminar otra asignación', TextAlignment.center);
+        console.writeLine('2. Salir', TextAlignment.center);
+      
         opcion = int.parse(stdin.readLineSync()!);
+        console.resetColorAttributes();
         opcion = volverIntentar(opcion);
 
       }while(opcion != 2);
@@ -699,9 +934,19 @@ void asignacionSeccion(List<List<dynamic>> asignaciones, List<String> estudiante
     //VER ASIGNACIONES
     case 4:
       for (var i = 0; i < asignaciones.length; i++) {
-        print("${temasNombre[i]}:");
+        console.clearScreen();
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.magenta); 
+        console.writeLine('${temasNombre[i]}:', TextAlignment.center);
+        console.resetColorAttributes();
         for (var j = 0; j < asignaciones[i][1].length; j++) {
-          print(" ${j + 1}. ${asignaciones[i][1][j]}");
+          console.clearScreen();
+          console.setBackgroundColor(ConsoleColor.white); 
+          console.setForegroundColor(ConsoleColor.magenta); 
+          console.writeLine('${j + 1}. ${asignaciones[i][1][j]}', TextAlignment.center);
+          console.resetColorAttributes();  
+
+          
         }
       }
       break;
@@ -722,24 +967,42 @@ void asignacionSeccion(List<List<dynamic>> asignaciones, List<String> estudiante
               estudiantesSinAsignar.removeAt(elegido);
             }
         }
-        print("Los temas quedaron asignados de la siguiente manera:");
+        console.clearScreen();
+        console.setBackgroundColor(ConsoleColor.white); 
+        console.setForegroundColor(ConsoleColor.magenta); 
+        console.writeLine('Los temas quedaron asignados de la siguiente manera:', TextAlignment.center);
         for (var i = 0; i < asignaciones.length; i++) {
-          print("${temasNombre[i]}:");
+          console.writeLine('${temasNombre[i]}:', TextAlignment.center);
+         
           for (var j = 0; j < asignaciones[i][1].length; j++) {
-            print(" ${j + 1}. ${asignaciones[i][1][j]}");
+            console.writeLine('${j + 1}. ${asignaciones[i][1][j]}', TextAlignment.center);
+            
           }
         }
-        print("1. Volver a asignar");
-        print("2. Salir");
+        console.setBackgroundColor(ConsoleColor.magenta); 
+        console.setForegroundColor(ConsoleColor.black); 
+        console.writeLine('1. Volver a asignar', TextAlignment.center);
+        console.writeLine('2. Salir', TextAlignment.center);
         opcion = int.parse(stdin.readLineSync()!);
         opcion = volverIntentar(opcion);
       }while(opcion != 2);
       break;
     case 6:
+        console.clearScreen();
+        console.setBackgroundColor(ConsoleColor.blue);
+        console.setForegroundColor(ConsoleColor.white);
+        console.writeLine('Saliendo...', TextAlignment.center);
+        console.resetColorAttributes();
       break;
     
     default:
-      print("Ingrese una opción correcta");
+      console.setBackgroundColor(ConsoleColor.red); 
+      console.setForegroundColor(ConsoleColor.black); 
+      console.writeLine('Ingrese una opción correcta', TextAlignment.center);
+      console.resetColorAttributes();
       break;
   }
 }
+
+
+
